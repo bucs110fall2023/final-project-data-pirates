@@ -6,7 +6,7 @@
 
 ## Team Members
 
-Hilary Rojas Rosales
+Hilary Rojas Rosales 
 
 ***
 
