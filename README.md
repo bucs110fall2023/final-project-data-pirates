@@ -7,7 +7,7 @@
 ## Team Members
 
 Hilary Rojas Rosales 
-Daniela Suqui
+Daniela Suqui Estrella
 ***
 
 ## Project Description
