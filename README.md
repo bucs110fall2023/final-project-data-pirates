@@ -12,7 +12,7 @@ Daniela Suqui Estrella
 
 ## Project Description
 
-A scary interactive game .Your choices lead to your ending.First scene explains the situation.From there you decide where to go, who to talk to... stuff like that.
+A scary interactive game. Your choices lead to your ending. First scene explains the situation. From there you decide where to go, who to talk to... stuff like that.
 
 ***    
 
