@@ -1,6 +1,18 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-718a45dd9cf7e7f842a935f5ebbe5719a5e09af4491e668f4dbf3b35d5cca122.svg)](https://classroom.github.com/online_ide?assignment_repo_id=12803274&assignment_repo_type=AssignmentRepo)
 :warning: Everything between << >> needs to be replaced (remove << >> after replacing)
 
+[1] project title
+[1] course number 
+[1] semester
+[3] project overview
+[2] Lists additional modules with citation
+[2] Class relationship diagram
+[5] Data Permanence Feature
+[3] Contains screenshots of the Final GUI
+[2] Project file structure
+[5] contains a copy of your ATP in table format
+[5] Template text removed, proofread, etc.
+
 # << Project Title >>
 ## CS110 Final Project  << Semester, Year >>
 
