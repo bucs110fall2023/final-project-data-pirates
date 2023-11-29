@@ -7,7 +7,8 @@
 ## Team Members
 
 << List team member names >>
-
+Hilary Rojas Rosales 
+Daniela Suqui Estrella
 ***
 
 ## Project Description
