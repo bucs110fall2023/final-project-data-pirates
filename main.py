@@ -1,4 +1,5 @@
 import pygame
+import requests
 #import your controller
 
 def main():
@@ -12,38 +13,88 @@ def main():
 if __name__ == '__main__':
     main()
 
-# pygame.display.flip()
-screen_width = 1200
-screen_height = 800
-a = 0
-start_pos = 0
 
-screen = pygame.display.set_mode([screen_width, screen_height])
-pygame.display.set_caption("Scary Game Title")
+WINDOW_WIDTH = 800
+WINDOW_HEIGHT = 600
+BLACK = (0, 0, 0)
 
-font = pygame.font.Font(None, 48)
-choice_1 = font.render("Start", True , "white")
+def main():
+    response = requests.get("https://youtu.be/9d9e6XmNn9Q?si=iqP9xeQUg1aplFxQ")
+    print(response.status_code)
+    print(response.text)
+main()
 
-while a == 0:
-    screen.fill("black")
-    pos = pygame.mouse.get_pos()
-    if 10 <= pos[0] <= 210 and 10 <= pos[1] <= 110:
-        pygame.draw.rect(screen, "white", [500, 400, 200, 100] )
-    else:
-        pygame.draw.rect(screen, "gray" , [500, 400, 200, 100])
-     
-    screen.blit(choice_1, (550, 450))
+
+
+#window set up
+window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+pygame.display.set_caption("title of game") #replace with actual game title
+
+#Font & text settings
+font = pygame.font.Font(None, 36)
+text_color = (255,255,255)
+
+# font for start button - D
+font_start = pygame.font.Font(None, 48)
+start_text = font_start.render("Start", True , "black")
+
+#Player name imput
+input_box = pygame.Rect(100,200,140,32)
+name = ""
+input_active = True
+
+#this the functtion to draw button
+def draw_button():
+    button_rect = pygame.Rect(WINDOW_WIDTH - 100, WINDOW_HEIGHT - 50, 50, 30)
+    pygame.draw.rect(window, (255, 0, 0), button_rect) #red button
+    start_button = pygame.Rect(300, 200, 200, 100)
+    pygame.draw.rect(window, "white", start_button) #white rectangle - D
+    window.blit(start_text, (360, 240)) #start text for the button - D
+
+running = True
+while running:
+    window.fill(BLACK) #Fill the window with black
+    draw_button()
 
     for event in pygame.event.get():
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if  500<= pos[0] <= 600 and 400<= pos[1] <= 500:
-                start_pos += 1
-                a += 1
-    pygame.display.update()
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            #this gonna check if button clicked
+            mouse_x, mouse_y = pygame.mouse.get_pos()
+            button_rect = pygame.Rect(WINDOW_WIDTH - 100, WINDOW_HEIGHT -50, 50, 30)
+            start_button = pygame.Rect(300, 200, 200, 100) # D #D
+            if button_rect.collidepoint(mouse_x, mouse_y):
+                if music_playing:
+                    main.stop()
+                else:
+                    main.play(-1) #loops the music
+                music_playing = not music_playing
+
+            if start_button.collidepoint(mouse_x, mouse_y): #D
+                window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+                window.fill("pink")
+                pygame.display.flip()
+                pygame.time.wait(1000)
 
 
-    
-    while a == 1:
-        screen=pygame.display.set_mode([screen_width, screen_height])
-        screen.fill("black")
-        pygame.display.flip()
+
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            #this gonna check if button clicked
+            mouse_x, mouse_y = pygame.mouse.get_pos()
+            button_rect = pygame.Rect(WINDOW_WIDTH - 100, WINDOW_HEIGHT -50, 50, 30)
+            if button_rect.collidepoint(mouse_x, mouse_y):
+                if music_playing:
+                    main.stop()
+                else:
+                    main.play(-1) #loops the music
+                music_playing = not music_playing
+
+
+    pygame.display.flip()
+
+pygame.quit()
