@@ -64,19 +64,32 @@ display_start_time = 0
 
 def display_start_text():
     text = (
-        "Fate has led you to stumble across this old haunted mansion. "
-        "To avoid being cursed, you must muster up the courage to go inside "
-        "and explore 3 different rooms to escape and get away from the curses! "
-        "Once you enter a room, you will stumble upon different scenarios "
-        "in which you will have to use your intuition to make crucial choices "
-        "that will impact your future or else… This could lead to dire consequences "
-        "that you will regret! If you fail to escape, you will be trapped.... "
-        "Good Luck! Sincerely, Data Pirates"
+        "Fate has led you to stumble across this old \n "
+        "home.To avoid being cursed, you must \n"
+        "explore 3 different rooms to escape Once you \n "
+        "enter a room, you will stumble upon different\n "
+        "scenarios. You must make crucial choices \n"
+        "that will impact your future or else… \n "
+        "If you fail to escape, you will be trapped....\n "
+        "Good Luck! \n"
+        "Sincerely,\n"
+        "    - Data Pirates\n"
     )
+
+    box_width = 600
+    box_height = 400
+    box_x = (WINDOW_WIDTH - box_width) // 2
+    box_y = (WINDOW_HEIGHT - box_height) // 2
+
     text_surface = font.render(text, True, text_color)
-    text_rect = text_surface.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2))
-    pygame.draw.rect(window, (255, 255, 255), text_rect, 1)  # Outline around the text
-    window.blit(text_surface, text_rect)
+    lines = text.split('\n')
+    for i, line in enumerate(lines):
+        line_surface = font.render(line, True, text_color)
+        window.blit(line_surface, (box_x + 20, box_y + 20 + i * 30))
+
+    pygame.draw.rect(window, (255, 255, 255), (box_x, box_y, box_width, box_height), 3)
+
+
 running = True
 
 music_playing = False # to track music state
@@ -88,31 +101,28 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            #this gonna check if button clicked
             mouse_x, mouse_y = pygame.mouse.get_pos()
-            button_rect = pygame.Rect(WINDOW_WIDTH - 100, WINDOW_HEIGHT -50, 50, 30)
-            start_button = pygame.Rect(300, 150, 200, 100) # D #D
-            quit_button = pygame.Rect(300, 300, 200, 100) # D #D
+            button_rect = pygame.Rect(WINDOW_WIDTH - 100, WINDOW_HEIGHT - 50, 50, 30)
+            start_button = pygame.Rect(300, 150, 200, 100)
+            quit_button = pygame.Rect(300, 300, 200, 100)
             if button_rect.collidepoint(mouse_x, mouse_y):
                 if music_playing:
                     mixer.music.pause()
                 else:
-                    mixer.music.unpause() #loops the music
+                    mixer.music.unpause()
                 music_playing = not music_playing
 
-            elif start_button.collidepoint(mouse_x, mouse_y) and not display_text: #D
+            elif start_button.collidepoint(mouse_x, mouse_y) and not display_text:
                 print("Start button clicked")
                 window.fill(BLACK)
                 display_text = True
                 display_start_time = pygame.time.get_ticks()
 
-        if display_text:
-            display_start_text()
-            current_time = pygame.time.get_ticks()
-            if current_time - display_start_time >= display_time:
-                display_text = False
-                
-    
+    if display_text:
+        display_start_text()
+        current_time = pygame.time.get_ticks()
+        if current_time - display_start_time >= display_time:
+            display_text = False   
                 
     pygame.display.flip()
 
