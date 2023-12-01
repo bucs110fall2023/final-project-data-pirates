@@ -36,6 +36,7 @@ text_color = (255,255,255)
 
 # font for start button - D
 font_start = pygame.font.Font(None, 48)
+game_name_text = font_start.render("Cracked and cackling", True , "white") # title subject to change - D
 start_text = font_start.render("START", True , "black")
 quit_text = font_start.render("QUIT", True , "black")
 
@@ -48,12 +49,16 @@ input_active = True
 def draw_button():
     button_rect = pygame.Rect(WINDOW_WIDTH - 100, WINDOW_HEIGHT - 50, 50, 30)
     pygame.draw.rect(window, (255, 0, 0), button_rect) #red button
+
     start_button = pygame.Rect(300, 150, 200, 100)
     pygame.draw.rect(window, "white", start_button) #top white rectangle (start) - D
     window.blit(start_text, (345, 185)) #start text for the button - D
+
     quit_button = pygame.Rect(300, 300, 200, 100)
     pygame.draw.rect(window, "white", quit_button) #bottom white rectangle (quit) -D
-    window.blit(quit_text, (360, 335)) #start text for the button - D
+    window.blit(quit_text, (355, 335)) #start text for the button - D
+
+    window.blit(game_name_text, (220, 50))
 
 running = True
 while running:
