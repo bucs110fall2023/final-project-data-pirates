@@ -36,7 +36,8 @@ text_color = (255,255,255)
 
 # font for start button - D
 font_start = pygame.font.Font(None, 48)
-start_text = font_start.render("Start", True , "black")
+start_text = font_start.render("START", True , "black")
+quit_text = font_start.render("QUIT", True , "black")
 
 #Player name imput
 input_box = pygame.Rect(100,200,140,32)
@@ -47,9 +48,12 @@ input_active = True
 def draw_button():
     button_rect = pygame.Rect(WINDOW_WIDTH - 100, WINDOW_HEIGHT - 50, 50, 30)
     pygame.draw.rect(window, (255, 0, 0), button_rect) #red button
-    start_button = pygame.Rect(300, 200, 200, 100)
-    pygame.draw.rect(window, "white", start_button) #white rectangle - D
-    window.blit(start_text, (360, 240)) #start text for the button - D
+    start_button = pygame.Rect(300, 150, 200, 100)
+    pygame.draw.rect(window, "white", start_button) #top white rectangle (start) - D
+    window.blit(start_text, (345, 185)) #start text for the button - D
+    quit_button = pygame.Rect(300, 300, 200, 100)
+    pygame.draw.rect(window, "white", quit_button) #bottom white rectangle (quit) -D
+    window.blit(quit_text, (360, 335)) #start text for the button - D
 
 running = True
 while running:
@@ -63,7 +67,8 @@ while running:
             #this gonna check if button clicked
             mouse_x, mouse_y = pygame.mouse.get_pos()
             button_rect = pygame.Rect(WINDOW_WIDTH - 100, WINDOW_HEIGHT -50, 50, 30)
-            start_button = pygame.Rect(300, 200, 200, 100) # D #D
+            start_button = pygame.Rect(300, 150, 200, 100) # D #D
+            quit_button = pygame.Rect(300, 300, 200, 100) # D #D
             if button_rect.collidepoint(mouse_x, mouse_y):
                 if music_playing:
                     main.stop()
@@ -73,10 +78,12 @@ while running:
 
             if start_button.collidepoint(mouse_x, mouse_y): #D
                 window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
-                window.fill("pink")
+                window.fill("black")
                 pygame.display.flip()
                 pygame.time.wait(1000)
 
+            if quit_button.collidepoint(mouse_x, mouse_y): #D
+                main.stop()
 
 
 
