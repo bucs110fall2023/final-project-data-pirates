@@ -7,7 +7,7 @@ mixer.init()
 
 #Load music file and set volume
 mixer.music.load('lost-soul_medium-177571.mp3') #insert song here
-mixer.music.set_volume(0.2)
+mixer.music.set_volume(50)
 
 def main():
     pygame.init()
@@ -25,6 +25,8 @@ WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
 BLACK = (0, 0, 0)
 
+volume_button_visible = True
+start_exit_buttons_visible = True
 #window set up
 window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption("title of game") #replace with actual game title
@@ -49,17 +51,18 @@ def draw_button():
     button_rect = pygame.Rect(WINDOW_WIDTH - 100, WINDOW_HEIGHT - 50, 50, 30)
     pygame.draw.rect(window, (255, 0, 0), button_rect) #red button
 
-    start_button = pygame.Rect(300, 150, 200, 100)
-    pygame.draw.rect(window, "white", start_button) #top white rectangle (start) - D
-    window.blit(start_text, (345, 185)) #start text for the button - D
+    if start_exit_buttons_visible:
+        start_button = pygame.Rect(300, 150, 200, 100)
+        pygame.draw.rect(window, "white", start_button) #top white rectangle (start) - D
+        window.blit(start_text, (345, 185)) #start text for the button - D
 
-    quit_button = pygame.Rect(300, 300, 200, 100)
-    pygame.draw.rect(window, "white", quit_button) #bottom white rectangle (quit) -D
-    window.blit(quit_text, (355, 335)) #start text for the button - D
+        quit_button = pygame.Rect(300, 300, 200, 100)
+        pygame.draw.rect(window, "white", quit_button) #bottom white rectangle (quit) -D
+        window.blit(quit_text, (355, 335)) #start text for the button - D
 
     window.blit(game_name_text, (220, 50))
 display_text = False
-display_time = 5000
+display_time = 20000
 display_start_time = 0
 
 def display_start_text():
@@ -93,6 +96,8 @@ def display_start_text():
 running = True
 
 music_playing = False # to track music state
+start_button = pygame.Rect(300, 150, 200, 100)
+volume_button = pygame.Rect(300, 250, 200, 100)
 while running:
     window.fill(BLACK) #Fill the window with black
     draw_button()
@@ -102,21 +107,24 @@ while running:
             running = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()
-            button_rect = pygame.Rect(WINDOW_WIDTH - 100, WINDOW_HEIGHT - 50, 50, 30)
-            start_button = pygame.Rect(300, 150, 200, 100)
-            quit_button = pygame.Rect(300, 300, 200, 100)
-            if button_rect.collidepoint(mouse_x, mouse_y):
-                if music_playing:
-                    mixer.music.pause()
-                else:
-                    mixer.music.unpause()
-                music_playing = not music_playing
+            #button_rect = pygame.Rect(WINDOW_WIDTH - 100, WINDOW_HEIGHT - 50, 50, 30)
+            #start_button = pygame.Rect(300, 150, 200, 100)
+            #quit_button = pygame.Rect(300, 300, 200, 100)
+            if start_button.collidepoint(mouse_x, mouse_y) and start_exit_buttons_visible:
+                print("Start button clicked")
+                pass
+
+            elif volume_button.collidepoint(mouse_x, mouse_y)and volume_button_visible:
+                print("Volume button clicked")
+                pass
 
             elif start_button.collidepoint(mouse_x, mouse_y) and not display_text:
                 print("Start button clicked")
                 window.fill(BLACK)
                 display_text = True
                 display_start_time = pygame.time.get_ticks()
+
+                start_exit_buttons_visible = False
 
     if display_text:
         display_start_text()
