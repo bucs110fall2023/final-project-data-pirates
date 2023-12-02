@@ -123,10 +123,12 @@ while running:
                 display_text = True
                 display_start_time = pygame.time.get_ticks()
 
-            elif quit_button.collidepoint(mouse_x, mouse_y) and not display_text:
-                pygame.quit()
-
                 start_exit_buttons_visible = False
+
+            elif quit_button.collidepoint(mouse_x, mouse_y) and not display_text:
+                pygame.quit
+
+            
 
     if display_text:
         display_start_text()
