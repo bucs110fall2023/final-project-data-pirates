@@ -56,8 +56,7 @@ def draw_button():
         start_button = pygame.Rect(300, 150, 200, 100)
         pygame.draw.rect(window, "white", start_button) #top white rectangle (start) - D
         window.blit(start_text, (345, 185)) #start text for the button - D
-        
-    if start_exit_buttons_visible:
+
         quit_button = pygame.Rect(300, 300, 200, 100)
         pygame.draw.rect(window, "white", quit_button) #bottom white rectangle (quit) -D
         window.blit(quit_text, (355, 335)) #start text for the button - D
@@ -100,6 +99,7 @@ running = True
 music_playing = True # to track music state
 start_button = pygame.Rect(300, 150, 200, 100)
 volume_button = pygame.Rect(300, 250, 200, 100)
+quit_button = pygame.Rect(300, 300, 200, 100)
 while running:
     window.fill(BLACK) #Fill the window with black
     draw_button()
@@ -122,6 +122,9 @@ while running:
                 window.fill(BLACK)
                 display_text = True
                 display_start_time = pygame.time.get_ticks()
+
+            elif quit_button.collidepoint(mouse_x, mouse_y) and not display_text:
+                pygame.quit()
 
                 start_exit_buttons_visible = False
 
