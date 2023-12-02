@@ -7,7 +7,8 @@ mixer.init()
 
 #Load music file and set volume
 mixer.music.load('lost-soul_medium-177571.mp3') #insert song here
-mixer.music.set_volume(50)
+mixer.music.set_volume(0.7)
+mixer.music.play()
 
 def main():
     pygame.init()
@@ -95,7 +96,7 @@ def display_start_text():
 
 running = True
 
-music_playing = False # to track music state
+music_playing = True # to track music state
 start_button = pygame.Rect(300, 150, 200, 100)
 volume_button = pygame.Rect(300, 250, 200, 100)
 while running:
@@ -107,16 +108,13 @@ while running:
             running = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()
-            #button_rect = pygame.Rect(WINDOW_WIDTH - 100, WINDOW_HEIGHT - 50, 50, 30)
-            #start_button = pygame.Rect(300, 150, 200, 100)
-            #quit_button = pygame.Rect(300, 300, 200, 100)
-            if start_button.collidepoint(mouse_x, mouse_y) and start_exit_buttons_visible:
-                print("Start button clicked")
-                pass
-
-            elif volume_button.collidepoint(mouse_x, mouse_y)and volume_button_visible:
+            if volume_button.collidepoint(mouse_x, mouse_y) and volume_button_visible:
                 print("Volume button clicked")
-                pass
+                if music_playing:
+                    mixer.music.pause()
+                else:
+                    mixer.music.unpause()  # Resume music playback
+                music_playing = not music_playing
 
             elif start_button.collidepoint(mouse_x, mouse_y) and not display_text:
                 print("Start button clicked")
