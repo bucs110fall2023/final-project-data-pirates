@@ -98,7 +98,7 @@ running = True
 
 music_playing = True # to track music state
 start_button = pygame.Rect(300, 150, 200, 100)
-volume_button = pygame.Rect(300, 250, 200, 100)
+volume_button = pygame.Rect(WINDOW_WIDTH - 100, WINDOW_HEIGHT - 50, 200, 100)
 quit_button = pygame.Rect(300, 300, 200, 100)
 while running:
     window.fill(BLACK) #Fill the window with black
@@ -126,7 +126,10 @@ while running:
                 start_exit_buttons_visible = False
 
             elif quit_button.collidepoint(mouse_x, mouse_y) and not display_text:
-                pygame.quit
+                print("quit button clicked")
+                pygame.quit()
+
+            
 
             
 
