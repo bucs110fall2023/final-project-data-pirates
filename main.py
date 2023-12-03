@@ -241,7 +241,7 @@ while running:
                 window.blit(image, (500, 500))  # Adjust position as needed
 
                 # Play the audio
-                audio = mixer.Sound('screams-ofagony-142447.mp3')  # Replace 'your_audio.mp3' with your audio file
+                audio = mixer.Sound('Scream.mp3')  # Replace 'your_audio.mp3' with your audio file
                 audio.play()
 
                 
