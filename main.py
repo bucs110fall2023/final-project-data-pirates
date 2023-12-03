@@ -141,6 +141,8 @@ def display_first_scenario(player_name):
     no_text = font.render("No", True, "black")
     window.blit(no_text, (480, 415))  # Adjust text position for No button
 
+    return yes_button, no_button
+
 
 
 
@@ -220,8 +222,27 @@ while running:
             display_text = False 
     
     elif display_scenario1:
-        # Display the first scenario after the letter
-        display_first_scenario(player_name if name_input_done else "Player")
+        yes_button, no_button = display_first_scenario(player_name if name_input_done else "Player")
+
+        # Check for button clicks
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_x, mouse_y = pygame.mouse.get_pos()
+
+            # Check if Yes button is clicked
+            if yes_button.collidepoint(mouse_x, mouse_y):
+                print("Yes button clicked")
+                # Handle Yes action here
+
+            # Check if No button is clicked
+            if no_button.collidepoint(mouse_x, mouse_y):
+                print("No button clicked")
+                # Display the image
+                image = pygame.image.load('Screenshot 2023-12-01 at 1.27.08.png')  # Replace 'your_image.png' with your image file
+                window.blit(image, (100, 100))  # Adjust position as needed
+
+                # Play the audio
+                audio = mixer.Sound('screams-ofagony-142447.mp3')  # Replace 'your_audio.mp3' with your audio file
+                audio.play()
 
                 
     pygame.display.flip()
