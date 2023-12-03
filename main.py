@@ -9,7 +9,7 @@ mixer.init()
 mixer.music.load('lost-soul_medium-177571.mp3') #insert song here
 mixer.music.set_volume(0.7)
 mixer.music.play()
-
+#bruh
 def main():
     pygame.init()
     #Create an instance on your controller object
