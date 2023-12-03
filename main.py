@@ -222,6 +222,7 @@ while running:
             display_text = False 
     
     elif display_scenario1:
+        # Displays the first scenario
         yes_button, no_button = display_first_scenario(player_name if name_input_done else "Player")
 
         # Check for button clicks
