@@ -238,7 +238,7 @@ while running:
                 print("No button clicked")
                 # Display the image
                 image = pygame.image.load('Screenshot 2023-12-01 at 1.27.08.png')  # Replace 'your_image.png' with your image file
-                window.blit(image, (100, 100))  # Adjust position as needed
+                window.blit(image, (500, 500))  # Adjust position as needed
 
                 # Play the audio
                 audio = mixer.Sound('screams-ofagony-142447.mp3')  # Replace 'your_audio.mp3' with your audio file
