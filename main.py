@@ -69,8 +69,8 @@ display_start_time = 0
 def display_start_text():
     text = (
         "Fate has led you to stumble across this old \n "
-        "home.To avoid being cursed, you must \n"
-        "explore 3 different rooms to escape Once you \n "
+        "home. To avoid being cursed, you must \n"
+        "explore 3 different rooms to escape. Once you \n "
         "enter a room, you will stumble upon different\n "
         "scenarios. You must make crucial choices \n"
         "that will impact your future or else… \n "

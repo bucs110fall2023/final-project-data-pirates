@@ -14,18 +14,15 @@
 [5] Template text removed, proofread, etc.
 
 # << Project Title >>
-## CS110 Final Project  << Semester, Year >>
+## CS110 Final Project  << Fall Semester, 2023 >>
 
 ## Team Members
-
-<< List team member names >>
 Hilary Rojas Rosales 
 Daniela Suqui Estrella
 ***
 
 ## Project Description
-
-A scary interactive game. Your choices lead to your ending. First scene explains the situation. From there you decide where to go, who to talk to... stuff like that.
+A scary interactive game where the player will receive a letter with a message telling them that they have stumbled across a haunted house and they have to escape. The letter will explain the instructions and the player will face three different scenarios, where they will make a decision in order to escape. If the player fails to make the right choice, they will get jumpscared, and lose the game but if they do make the right choice, they will continue playing until they fail or win.
 
 ***    
 
