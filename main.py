@@ -127,6 +127,22 @@ def display_first_scenario(player_name):
 
     pygame.draw.rect(window, (255, 255, 255), (box_x, box_y, box2_width, box2_height), 3)
 
+    # Define rectangles for Yes and No buttons
+    yes_button = pygame.Rect(250, 400, 100, 50)
+    no_button = pygame.Rect(450, 400, 100, 50)
+
+    # Draw Yes button
+    pygame.draw.rect(window, "green", yes_button)  # green button for Yes
+    yes_text = font.render("Yes", True, "black")
+    window.blit(yes_text, (280, 415))  # Adjust text position for Yes button
+
+    # Draw No button
+    pygame.draw.rect(window, "red", no_button)  # red button for No
+    no_text = font.render("No", True, "black")
+    window.blit(no_text, (480, 415))  # Adjust text position for No button
+
+
+
 
 volume_button = pygame.Rect(WINDOW_WIDTH - 100, WINDOW_HEIGHT - 50, 50, 30)
 running = True
