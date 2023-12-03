@@ -49,7 +49,7 @@ start_text = font_start.render("START", True , "black")
 quit_text = font_start.render("QUIT", True , "black")
 
 #Player name imput
-input_box = pygame.Rect(100,200,140,32)
+input_box = pygame.Rect(335,500,140,32)
 name = ""
 input_active = True
 
@@ -118,6 +118,18 @@ while running:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()
 
+            if start_button.collidepoint(mouse_x, mouse_y) and not display_text:
+                print("Start button clicked")
+                if not name_input_done:
+                    current_state = GameState.NAME_INPUT  # Switch to name input state
+                    # Display "What is your name?" text above the input box
+                    question_surface = font.render("What is your name?", True, (255, 255, 255))
+                    window.blit(question_surface, (input_box.x, input_box.y - 50))
+
+                    pygame.draw.rect(window, (255, 255, 255), input_box, 2)
+                    text_surface = font.render(player_name, True, (255, 255, 255))
+                    window.blit(text_surface, (input_box.x + 5, input_box.y + 5))
+
             if volume_button.collidepoint(mouse_x, mouse_y) and volume_button_visible:
                 print("Volume button clicked")
                 if music_playing:
@@ -127,7 +139,7 @@ while running:
                 music_playing = not music_playing
                 pass
 
-            elif start_button.collidepoint(mouse_x, mouse_y) and not display_text:
+            if start_button.collidepoint(mouse_x, mouse_y) and not display_text:
                 print("Start button clicked")
                 if not name_input_done:
                     current_state = GameState.NAME_INPUT  # Switch to name input state
