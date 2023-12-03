@@ -55,10 +55,15 @@ input_active = True
 
 #this the functtion to draw button
 def draw_button():
+    
     button_rect = pygame.Rect(WINDOW_WIDTH - 100, WINDOW_HEIGHT - 50, 50, 30)
     pygame.draw.rect(window, (255, 0, 0), button_rect) #red button
 
     if start_exit_buttons_visible:
+        # Display "What is your name?" text above the input box
+        question_surface = font.render("What is your name?", True, (255, 255, 255))
+        window.blit(question_surface, (input_box.x - 50, input_box.y - 50))
+
         start_button = pygame.Rect(300, 150, 200, 100)
         pygame.draw.rect(window, "white", start_button) #top white rectangle (start) - D
         window.blit(start_text, (345, 185)) #start text for the button - D
@@ -100,6 +105,29 @@ def display_start_text(player_name):
 
     pygame.draw.rect(window, (255, 255, 255), (box_x, box_y, box_width, box_height), 3)
 
+# For the first scenario
+display_scenario1 = False
+def display_first_scenario(player_name):
+    text_scenario1 = (
+        f"{player_name}, you have entered the \n" 
+        "first room in the house, and you \n"
+        "see a cup filled with an unusual \n"
+        "substance, do you drink it? \n"
+    )
+
+    box2_width = 410
+    box2_height = 150
+    box_x = (WINDOW_WIDTH - box2_width) // 2
+    box_y = (WINDOW_HEIGHT - box2_height) // 2
+
+    lines = text_scenario1.split('\n')
+    for i, line in enumerate(lines):
+        line_surface = font.render(line, True, "white")
+        window.blit(line_surface, (box_x + 20, box_y + 20 + i * 30))
+
+    pygame.draw.rect(window, (255, 255, 255), (box_x, box_y, box2_width, box2_height), 3)
+
+
 volume_button = pygame.Rect(WINDOW_WIDTH - 100, WINDOW_HEIGHT - 50, 50, 30)
 running = True
 name_input_done = False
@@ -120,11 +148,10 @@ while running:
 
             if start_button.collidepoint(mouse_x, mouse_y) and not display_text:
                 print("Start button clicked")
+                
                 if not name_input_done:
                     current_state = GameState.NAME_INPUT  # Switch to name input state
-                    # Display "What is your name?" text above the input box
-                    question_surface = font.render("What is your name?", True, (255, 255, 255))
-                    window.blit(question_surface, (input_box.x, input_box.y - 50))
+                
 
                     pygame.draw.rect(window, (255, 255, 255), input_box, 2)
                     text_surface = font.render(player_name, True, (255, 255, 255))
@@ -146,6 +173,7 @@ while running:
                 else:
                     window.fill(BLACK)
                     display_text = True
+                    display_scenario1 = True
                     display_start_time = pygame.time.get_ticks()
                     start_exit_buttons_visible = False
 
@@ -174,6 +202,11 @@ while running:
         current_time = pygame.time.get_ticks()
         if current_time - display_start_time >= display_time:
             display_text = False 
+    
+    elif display_scenario1:
+        # Display the first scenario after the letter
+        display_first_scenario(player_name if name_input_done else "Player")
+
                 
     pygame.display.flip()
 

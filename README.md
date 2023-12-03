@@ -67,7 +67,7 @@ Expected Outcome: Players control over sounds
 
 Test Case 3: Name Check
 Test Description: Verify that the player can input their name.
-Test Steps: Once the game starts, verify that the player is asked to input their name and that they can do so.
+Test Steps: Once the game starts, the player will be prompted to input their name which will be later on used ..verify that the player is asked to input their name and that they can do so.
 Expected Outcome: The player’s name should be displayed in the game.
 
 Test Case 4: Jump scare
