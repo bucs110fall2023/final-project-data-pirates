@@ -9,7 +9,7 @@ mixer.init()
 mixer.music.load('lost-soul_medium-177571.mp3') #insert song here
 mixer.music.set_volume(0.7)
 mixer.music.play()
-
+#bruh
 def main():
     pygame.init()
     #Create an instance on your controller object
@@ -21,6 +21,12 @@ def main():
 if __name__ == '__main__':
     main()
 
+class GameState:
+    MAIN_MENU = 0
+    NAME_INPUT = 1
+    GAMEPLAY = 2
+
+current_state = GameState.MAIN_MENU
 
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
@@ -43,7 +49,7 @@ start_text = font_start.render("START", True , "black")
 quit_text = font_start.render("QUIT", True , "black")
 
 #Player name imput
-input_box = pygame.Rect(100,200,140,32)
+input_box = pygame.Rect(335,500,140,32)
 name = ""
 input_active = True
 
@@ -66,8 +72,9 @@ display_text = False
 display_time = 20000
 display_start_time = 0
 
-def display_start_text():
+def display_start_text(player_name):
     text = (
+        f"Dear {player_name}, \n"
         "Fate has led you to stumble across this old \n "
         "home. To avoid being cursed, you must \n"
         "explore 3 different rooms to escape. Once you \n "
@@ -93,13 +100,14 @@ def display_start_text():
 
     pygame.draw.rect(window, (255, 255, 255), (box_x, box_y, box_width, box_height), 3)
 
-
+volume_button = pygame.Rect(WINDOW_WIDTH - 100, WINDOW_HEIGHT - 50, 50, 30)
 running = True
-
-music_playing = True # to track music state
+name_input_done = False
+player_name = ""
+music_playing = True
 start_button = pygame.Rect(300, 150, 200, 100)
-volume_button = pygame.Rect(WINDOW_WIDTH - 100, WINDOW_HEIGHT - 50, 200, 100)
 quit_button = pygame.Rect(300, 300, 200, 100)
+
 while running:
     window.fill(BLACK) #Fill the window with black
     draw_button()
@@ -109,6 +117,19 @@ while running:
             running = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()
+
+            if start_button.collidepoint(mouse_x, mouse_y) and not display_text:
+                print("Start button clicked")
+                if not name_input_done:
+                    current_state = GameState.NAME_INPUT  # Switch to name input state
+                    # Display "What is your name?" text above the input box
+                    question_surface = font.render("What is your name?", True, (255, 255, 255))
+                    window.blit(question_surface, (input_box.x, input_box.y - 50))
+
+                    pygame.draw.rect(window, (255, 255, 255), input_box, 2)
+                    text_surface = font.render(player_name, True, (255, 255, 255))
+                    window.blit(text_surface, (input_box.x + 5, input_box.y + 5))
+
             if volume_button.collidepoint(mouse_x, mouse_y) and volume_button_visible:
                 print("Volume button clicked")
                 if music_playing:
@@ -116,28 +137,43 @@ while running:
                 else:
                     mixer.music.unpause()  # Resume music playback
                 music_playing = not music_playing
+                pass
 
-            elif start_button.collidepoint(mouse_x, mouse_y) and not display_text:
+            if start_button.collidepoint(mouse_x, mouse_y) and not display_text:
                 print("Start button clicked")
-                window.fill(BLACK)
-                display_text = True
-                display_start_time = pygame.time.get_ticks()
-
-                start_exit_buttons_visible = False
+                if not name_input_done:
+                    current_state = GameState.NAME_INPUT  # Switch to name input state
+                else:
+                    window.fill(BLACK)
+                    display_text = True
+                    display_start_time = pygame.time.get_ticks()
+                    start_exit_buttons_visible = False
 
             elif quit_button.collidepoint(mouse_x, mouse_y) and not display_text:
                 print("quit button clicked")
                 pygame.quit()
 
-            
+        elif current_state == GameState.NAME_INPUT and event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RETURN:
+                name_input_done = True
+                current_state = GameState.MAIN_MENU
+            elif event.key == pygame.K_BACKSPACE:
+                player_name = player_name[:-1]
+            else:
+                player_name += event.unicode
 
-            
+    if current_state == GameState.NAME_INPUT:
+        pygame.draw.rect(window, (255, 255, 255), input_box, 2)
+        text_surface = font.render(player_name, True, (255, 255, 255))
+        window.blit(text_surface, (input_box.x + 5, input_box.y + 5))
+         
 
-    if display_text:
-        display_start_text()
+    elif display_text:
+        # Display start text with player's name after name input is done
+        display_start_text(player_name if name_input_done else "Player")
         current_time = pygame.time.get_ticks()
         if current_time - display_start_time >= display_time:
-            display_text = False   
+            display_text = False 
                 
     pygame.display.flip()
 
