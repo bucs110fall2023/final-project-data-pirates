@@ -238,11 +238,12 @@ while running:
             if no_button.collidepoint(mouse_x, mouse_y):
                 print("No button clicked")
                 # Display the image
-                image = pygame.image.load('Screenshot 2023-12-01 at 1.27.08.png')  # Replace 'your_image.png' with your image file
-                window.blit(image, (500, 500))  # Adjust position as needed
+                image = pygame.image.load('Cup.png')  # Replace 'your_image.png' with your image file
+                window.blit(image, (1, 1,))  # Adjust position as needed
+                pygame.display.flip()
 
                 # Play the audio
-                audio = mixer.Sound('Scream.mp3')  # Replace 'your_audio.mp3' with your audio file
+                audio = mixer.Sound('screams-of-agony-142447.mp3')  
                 audio.play()
 
                 
