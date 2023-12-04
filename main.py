@@ -238,8 +238,9 @@ while running:
             if no_button.collidepoint(mouse_x, mouse_y):
                 print("No button clicked")
                 # Display the image
-                image = pygame.image.load('Cup.png')  # Replace 'your_image.png' with your image file
-                window.blit(image, (1, 1,))  # Adjust position as needed
+                image = pygame.image.load('Cup.png')  
+                image = pygame.transform.scale(image, (WINDOW_WIDTH, WINDOW_HEIGHT))
+                window.blit(image, (0, 0,))  # Adjust position as needed
                 pygame.display.flip()
 
                 # Play the audio
