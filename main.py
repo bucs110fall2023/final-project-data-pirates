@@ -143,6 +143,42 @@ def display_first_scenario(player_name):
 
     return yes_button, no_button
 
+display_scenario2 = False
+def display_second_scenario(player_name):
+    text_scenario2 = (
+        f"Great choice {player_name}, it's apple juice... \n"
+        "I hope. As you drink the juice, you \n" 
+        "see the door that leads you to the \n"
+        "second room but you hear someone \n"
+        "playing the piano, do you enter? \n"
+    )
+
+    box3_width = 490
+    box3_height = 180
+    box_x = (WINDOW_WIDTH - box3_width) // 2
+    box_y = (WINDOW_HEIGHT - box3_height) // 2
+
+    lines = text_scenario2.split('\n')
+    for i, line in enumerate(lines):
+        line_surface = font.render(line, True, "white")
+        window.blit(line_surface, (box_x + 20, box_y + 20 + i * 30))
+
+    pygame.draw.rect(window, (255, 255, 255), (box_x, box_y, box3_width, box3_height), 3)
+
+    # Define rectangles for Yes and No buttons
+    second_yes_button = pygame.Rect(250, 400, 100, 50)
+    second_no_button = pygame.Rect(450, 400, 100, 50)
+
+    # Draw Yes button
+    pygame.draw.rect(window, "green", second_yes_button)  # green button for Yes
+    yes_text = font.render("Yes", True, "black")
+    window.blit(yes_text, (280, 415))  # Adjust text position for Yes button
+
+    # Draw No button
+    pygame.draw.rect(window, "red", second_no_button)  # red button for No
+    no_text = font.render("No", True, "black")
+    window.blit(no_text, (480, 415))  # Adjust text position for No button
+    return second_yes_button, second_no_button
 
 
 
@@ -192,6 +228,7 @@ while running:
                     window.fill(BLACK)
                     display_text = True
                     display_scenario1 = True
+                    display_scenario2 = True
                     display_start_time = pygame.time.get_ticks()
                     start_exit_buttons_visible = False
 
@@ -231,6 +268,7 @@ while running:
 
             # Check if Yes button is clicked
             if yes_button.collidepoint(mouse_x, mouse_y):
+                display_scenario1 = False
                 print("Yes button clicked")
                 # Handle Yes action here
 
@@ -246,6 +284,12 @@ while running:
                 # Play the audio
                 audio = mixer.Sound('screams-of-agony-142447.mp3')  
                 audio.play()
+                pygame.time.wait(3000)
+    
+    elif display_scenario2:
+        # Displays the first scenario
+        second_yes_button, second_no_button = display_second_scenario(player_name if name_input_done else "Player")
+
 
                 
     pygame.display.flip()

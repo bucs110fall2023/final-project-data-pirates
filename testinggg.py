@@ -264,10 +264,15 @@ while running:
             mouse_x, mouse_y = pygame.mouse.get_pos()   
             
             if yes_button.collidepoint(mouse_x, mouse_y):
-                rect1 = pygame.Rect(100, 200, 600, 500)
-                pygame.draw.rect(window, "black", rect1)
+                display_scenario1 = False
+                #pygame.time.wait(1000)
+                #rect1 = pygame.Rect(100, 200, 600, 500)
+                #pygame.draw.rect(window, "black", rect1)
+                # yes_button, no_button = display_second_scenario(player_name if name_input_done else "Player")
                 #pygame.display.update()
-                display_second_scenario(player_name if name_input_done else "Player")   
+                # pygame.time.wait(2000)
+                # display_scenario1 = False
+                #    
                 print("Yes button clicked")
                 # Handle Yes action here
 
@@ -283,14 +288,11 @@ while running:
                 # Play the audio
                 audio = mixer.Sound('screams-of-agony-142447.mp3')  
                 audio.play()
+                pygame.time.wait(3000)
     
     elif display_scenario2:
         # Displays the first scenario
-        yes_button, no_button = display_first_scenario(player_name if name_input_done else "Player")
-
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            mouse_x, mouse_y = pygame.mouse.get_pos()
-
+        yes_button, no_button = display_second_scenario(player_name if name_input_done else "Player")
 
 
                 
