@@ -13,8 +13,8 @@
 [5] contains a copy of your ATP in table format
 [5] Template text removed, proofread, etc.
 
-# << Project Title >>
-## CS110 Final Project  << Fall Semester, 2023 >>
+# Deadly Decisions
+## CS110 Final Project, Fall Semester, 2023
 
 ## Team Members
 Hilary Rojas Rosales 
