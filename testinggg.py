@@ -42,6 +42,8 @@ pygame.display.set_caption("title of game") #replace with actual game title
 font = pygame.font.Font(None, 36)
 text_color = (255,255,255)
 
+
+
 # font for start button - D
 font_start = pygame.font.Font(None, 48)
 game_name_text = font_start.render("Cracked and cackling", True , "white") # title subject to change - D
@@ -146,10 +148,10 @@ display_scenario2 = False
 def display_second_scenario(player_name):
     text_scenario2 = (
         f"Great choice {player_name}, it's apple juice... \n"
-        "I hope. As you drink the juice, you \n" 
-        "see the door that leads you to the \n"
-        "second room but you hear someone \n"
-        "playing piano, do you enter? \n"
+        "I hope. As you drink the juice, you see \n" 
+        "the door that leads you to the second \n"
+        "room but you hear a piano sound \n"
+        "coming from the inside, do you enter? \n"
     )
 
     box3_width = 490
@@ -165,19 +167,56 @@ def display_second_scenario(player_name):
     pygame.draw.rect(window, (255, 255, 255), (box_x, box_y, box3_width, box3_height), 3)
 
     # Define rectangles for Yes and No buttons
-    yes_button = pygame.Rect(250, 400, 100, 50)
-    no_button = pygame.Rect(450, 400, 100, 50)
+    second_yes_button = pygame.Rect(250, 400, 100, 50)
+    second_no_button = pygame.Rect(450, 400, 100, 50)
 
     # Draw Yes button
-    pygame.draw.rect(window, "green", yes_button)  # green button for Yes
+    pygame.draw.rect(window, "green", second_yes_button)  # green button for Yes
     yes_text = font.render("Yes", True, "black")
     window.blit(yes_text, (280, 415))  # Adjust text position for Yes button
 
     # Draw No button
-    pygame.draw.rect(window, "red", no_button)  # red button for No
+    pygame.draw.rect(window, "red", second_no_button)  # red button for No
     no_text = font.render("No", True, "black")
     window.blit(no_text, (480, 415))  # Adjust text position for No button
-    return yes_button, no_button
+    return second_yes_button, second_no_button
+
+display_scenario3 = False
+def display_third_scenario(player_name):
+    text_scenario3 = (
+        "Phew, it looks like it was just an \n"
+        f"old piano. WAIT {player_name}!! \n"
+        "You see a President Harvey \n"
+        "cutout in the corner... Should \n"
+        "you poke him? \n"
+    )
+
+    box3_width = 430
+    box3_height = 180
+    box_x = (WINDOW_WIDTH - box3_width) // 2
+    box_y = (WINDOW_HEIGHT - box3_height) // 2
+
+    lines = text_scenario3.split('\n')
+    for i, line in enumerate(lines):
+        line_surface = font.render(line, True, "white")
+        window.blit(line_surface, (box_x + 20, box_y + 20 + i * 30))
+
+    pygame.draw.rect(window, (255, 255, 255), (box_x, box_y, box3_width, box3_height), 3)
+
+    # Define rectangles for Yes and No buttons
+    third_yes_button = pygame.Rect(250, 400, 100, 50)
+    third_no_button = pygame.Rect(450, 400, 100, 50)
+
+    # Draw Yes button
+    pygame.draw.rect(window, "green", third_yes_button)  # green button for Yes
+    yes_text = font.render("Yes", True, "black")
+    window.blit(yes_text, (280, 415))  # Adjust text position for Yes button
+
+    # Draw No button
+    pygame.draw.rect(window, "red", third_no_button)  # red button for No
+    no_text = font.render("No", True, "black")
+    window.blit(no_text, (480, 415))  # Adjust text position for No button
+    return third_yes_button, third_no_button
 
 volume_button = pygame.Rect(WINDOW_WIDTH - 100, WINDOW_HEIGHT - 50, 50, 30)
 running = True
@@ -226,6 +265,7 @@ while running:
                     display_text = True
                     display_scenario1 = True
                     display_scenario2 = True
+                    display_scenario3 = True
                     display_start_time = pygame.time.get_ticks()
                     start_exit_buttons_visible = False
 
@@ -268,9 +308,8 @@ while running:
                 #pygame.time.wait(1000)
                 #rect1 = pygame.Rect(100, 200, 600, 500)
                 #pygame.draw.rect(window, "black", rect1)
-                # yes_button, no_button = display_second_scenario(player_name if name_input_done else "Player")
                 #pygame.display.update()
-                # pygame.time.wait(2000)
+                pygame.time.wait(1000)
                 # display_scenario1 = False
                 #    
                 print("Yes button clicked")
@@ -291,8 +330,34 @@ while running:
                 pygame.time.wait(3000)
     
     elif display_scenario2:
+        # Displays the second scenario
+        second_yes_button, second_no_button = display_second_scenario(player_name if name_input_done else "Player")
+        # Check for button clicks
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_x, mouse_y = pygame.mouse.get_pos()   
+            
+            if second_yes_button.collidepoint(mouse_x, mouse_y):
+                display_scenario2 = False
+                print("Yes button clicked")
+
+
+            # Check if No button is clicked
+            if second_no_button.collidepoint(mouse_x, mouse_y):
+                print("No button clicked")
+                # Display the image
+                image = pygame.image.load('Cup.png')  
+                image = pygame.transform.scale(image, (WINDOW_WIDTH, WINDOW_HEIGHT))
+                window.blit(image, (0, 0,))  # Adjust position as needed
+                pygame.display.flip()
+
+                # Play the audio
+                audio = mixer.Sound('screams-of-agony-142447.mp3')  
+                audio.play()
+                pygame.time.wait(3000)
+
+    elif display_scenario3:
         # Displays the first scenario
-        yes_button, no_button = display_second_scenario(player_name if name_input_done else "Player")
+        third_yes_button, third_no_button = display_third_scenario(player_name if name_input_done else "Player")
 
 
                 
@@ -300,3 +365,37 @@ while running:
 
 pygame.quit()
 
+
+# display_scenario3 = False
+# def display_third_scenario(player_name):
+#     text_scenario3 = (
+#         f"Wait {player_name}! You see a President \n"
+#         "Harvey cutout in the corner... Should you poke him? \n"
+#     )
+
+#     box3_width = 490
+#     box3_height = 180
+#     box_x = (WINDOW_WIDTH - box3_width) // 2
+#     box_y = (WINDOW_HEIGHT - box3_height) // 2
+
+#     lines = text_scenario3.split('\n')
+#     for i, line in enumerate(lines):
+#         line_surface = font.render(line, True, "white")
+#         window.blit(line_surface, (box_x + 20, box_y + 20 + i * 30))
+
+#     pygame.draw.rect(window, (255, 255, 255), (box_x, box_y, box3_width, box3_height), 3)
+
+#     # Define rectangles for Yes and No buttons
+#     third_yes_button = pygame.Rect(250, 400, 100, 50)
+#     third_no_button = pygame.Rect(450, 400, 100, 50)
+
+#     # Draw Yes button
+#     pygame.draw.rect(window, "green", third_yes_button)  # green button for Yes
+#     yes_text = font.render("Yes", True, BLACK)
+#     window.blit(yes_text, (280, 415))  # Adjust text position for Yes button
+
+#     # Draw No button
+#     pygame.draw.rect(window, "red", third_no_button)  # red button for No
+#     no_text = font.render("No", True, BLACK)
+#     window.blit(no_text, (480, 415))  # Adjust text position for No button
+#     return third_yes_button, third_no_button
