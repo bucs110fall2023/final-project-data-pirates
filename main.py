@@ -287,7 +287,7 @@ while running:
                 pygame.time.wait(3000)
     
     elif display_scenario2:
-        # Displays the first scenario
+        # Displays the second scenario
         second_yes_button, second_no_button = display_second_scenario(player_name if name_input_done else "Player")
 
 
