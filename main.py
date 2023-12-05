@@ -36,7 +36,7 @@ volume_button_visible = True
 start_exit_buttons_visible = True
 #window set up
 window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
-pygame.display.set_caption("title of game") #replace with actual game title
+pygame.display.set_caption("Deadly Decisions") #replace with actual game title
 
 #Font & text settings
 font = pygame.font.Font(None, 36)
@@ -44,9 +44,9 @@ text_color = (255,255,255)
 
 # font for start button - D
 font_start = pygame.font.Font(None, 48)
-game_name_text = font_start.render("Cracked and cackling", True , "white") # title subject to change - D
-start_text = font_start.render("START", True , "black")
-quit_text = font_start.render("QUIT", True , "black")
+game_name_text = font_start.render("DEADLY DECISIONS", True , "white") # title subject to change - D
+start_text = font_start.render("START", True , BLACK)
+quit_text = font_start.render("QUIT", True , BLACK)
 
 #Player name imput
 input_box = pygame.Rect(335,500,140,32)
@@ -65,14 +65,14 @@ def draw_button():
         window.blit(question_surface, (input_box.x - 50, input_box.y - 50))
 
         start_button = pygame.Rect(300, 150, 200, 100)
-        pygame.draw.rect(window, "white", start_button) #top white rectangle (start) - D
+        pygame.draw.rect(window, "green", start_button) #top white rectangle (start) - D
         window.blit(start_text, (345, 185)) #start text for the button - D
 
         quit_button = pygame.Rect(300, 300, 200, 100)
-        pygame.draw.rect(window, "white", quit_button) #bottom white rectangle (quit) -D
+        pygame.draw.rect(window, "red", quit_button) #bottom white rectangle (quit) -D
         window.blit(quit_text, (355, 335)) #start text for the button - D
 
-    window.blit(game_name_text, (220, 50))
+    window.blit(game_name_text, (235, 50))
 display_text = False
 display_time = 20000
 display_start_time = 0
@@ -133,12 +133,12 @@ def display_first_scenario(player_name):
 
     # Draw Yes button
     pygame.draw.rect(window, "green", yes_button)  # green button for Yes
-    yes_text = font.render("Yes", True, "black")
+    yes_text = font.render("Yes", True, BLACK)
     window.blit(yes_text, (280, 415))  # Adjust text position for Yes button
 
     # Draw No button
     pygame.draw.rect(window, "red", no_button)  # red button for No
-    no_text = font.render("No", True, "black")
+    no_text = font.render("No", True, BLACK)
     window.blit(no_text, (480, 415))  # Adjust text position for No button
 
     return yes_button, no_button
@@ -171,12 +171,12 @@ def display_second_scenario(player_name):
 
     # Draw Yes button
     pygame.draw.rect(window, "green", second_yes_button)  # green button for Yes
-    yes_text = font.render("Yes", True, "black")
+    yes_text = font.render("Yes", True, BLACK)
     window.blit(yes_text, (280, 415))  # Adjust text position for Yes button
 
     # Draw No button
     pygame.draw.rect(window, "red", second_no_button)  # red button for No
-    no_text = font.render("No", True, "black")
+    no_text = font.render("No", True, BLACK)
     window.blit(no_text, (480, 415))  # Adjust text position for No button
     return second_yes_button, second_no_button
 
