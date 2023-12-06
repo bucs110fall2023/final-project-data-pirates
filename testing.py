@@ -6,7 +6,7 @@ pygame.init()
 mixer.init()
 
 #Load music file and set volume
-mixer.music.load('lost-soul_medium-177571.mp3') #insert song here
+mixer.music.load('assets/lost-soul_medium-177571.mp3') #insert song here
 mixer.music.set_volume(0.7)
 mixer.music.play()
 #bruh
@@ -353,13 +353,13 @@ while running:
             if no_button.collidepoint(mouse_x, mouse_y):
                 print("No button clicked")
                 # Display the image
-                image = pygame.image.load('Cup.png')  
+                image = pygame.image.load('assets/Cup.png')  
                 image = pygame.transform.scale(image, (WINDOW_WIDTH, WINDOW_HEIGHT))
                 window.blit(image, (0, 0,))  # Adjust position as needed
                 pygame.display.flip()
 
                 # Play the audio
-                audio = mixer.Sound('screams-of-agony-142447.mp3')  
+                audio = mixer.Sound('assets/screams-of-agony-142447.mp3')  
                 audio.play()
                 pygame.time.wait(3000)
     
@@ -380,13 +380,13 @@ while running:
             if second_no_button.collidepoint(mouse_x, mouse_y):
                 print("No button clicked")
                 # Display the image
-                image = pygame.image.load('piano.png')  
+                image = pygame.image.load('assets/piano.png')  
                 image = pygame.transform.scale(image, (WINDOW_WIDTH, WINDOW_HEIGHT))
                 window.blit(image, (0, 0,))  # Adjust position as needed
                 pygame.display.flip()
 
                 # Play the audio
-                audio = mixer.Sound('Scary_piano.mp3')  
+                audio = mixer.Sound('assets/Scary_piano.mp3')  
                 audio.play()
                 pygame.time.wait(11000)
 
@@ -401,13 +401,13 @@ while running:
             if third_yes_button.collidepoint(mouse_x, mouse_y):
                 print("Yes button clicked")
                 # Display the image
-                image = pygame.image.load('harvey.png')  
+                image = pygame.image.load('assets/harvey.png')  
                 image = pygame.transform.scale(image, (WINDOW_WIDTH, WINDOW_HEIGHT))
                 window.blit(image, (0, 0,))  # Adjust position as needed
                 pygame.display.flip()
 
                 # Play the audio
-                audio = mixer.Sound('demonic-woman-scream-6333.mp3')  
+                audio = mixer.Sound('assets/demonic-woman-scream-6333.mp3')  
                 audio.play()
                 pygame.time.wait(3000)
 
