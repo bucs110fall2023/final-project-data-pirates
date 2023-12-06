@@ -43,6 +43,7 @@ font = pygame.font.Font(None, 36)
 text_color = (255,255,255)
 
 # font for start button - D
+bigger_font = pygame.font.Font(None, 80)
 font_start = pygame.font.Font(None, 48)
 game_name_text = font_start.render("DEADLY DECISIONS", True , "white") # title subject to change - D
 start_text = font_start.render("START", True , BLACK)
@@ -97,7 +98,7 @@ def display_start_text(player_name):
     box_x = (WINDOW_WIDTH - box_width) // 2
     box_y = (WINDOW_HEIGHT - box_height) // 2
 
-    text_surface = font.render(text, True, text_color)
+ 
     lines = text.split('\n')
     for i, line in enumerate(lines):
         line_surface = font.render(line, True, text_color)
@@ -219,6 +220,9 @@ def display_third_scenario(player_name):
 
 you_survived = False
 def display_you_survived(player_name):
+    survival_text = bigger_font.render("You Escaped!", True, "green")
+    window.blit(survival_text, (205, 90))
+    
     you_survived_text = (
         "You instead gave him a hug, \n" 
         "and he helped you escape, \n"
@@ -239,6 +243,7 @@ def display_you_survived(player_name):
     for i, line in enumerate(lines):
         line_surface = font.render(line, True, "white")
         window.blit(line_surface, (box_x + 20, box_y + 20 + i * 30))
+
 
     pygame.draw.rect(window, (255, 255, 255), (box_x, box_y, box5_width, box5_height), 3)
 
