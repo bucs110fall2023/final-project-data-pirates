@@ -327,6 +327,7 @@ while running:
     elif display_scenario2:
         # Displays the second scenario
         second_yes_button, second_no_button = display_second_scenario(player_name if name_input_done else "Player")
+        pygame.time.wait(100)
         # Check for button clicks
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()   
@@ -340,7 +341,7 @@ while running:
             if second_no_button.collidepoint(mouse_x, mouse_y):
                 print("No button clicked")
                 # Display the image
-                image = pygame.image.load('Cup.png')  
+                image = pygame.image.load('piano.png')  
                 image = pygame.transform.scale(image, (WINDOW_WIDTH, WINDOW_HEIGHT))
                 window.blit(image, (0, 0,))  # Adjust position as needed
                 pygame.display.flip()
@@ -353,6 +354,28 @@ while running:
     elif display_scenario3:
         # Displays the third scenario
         third_yes_button, third_no_button = display_third_scenario(player_name if name_input_done else "Player")
+        
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_x, mouse_y = pygame.mouse.get_pos()   
+            
+            if third_yes_button.collidepoint(mouse_x, mouse_y):
+                display_scenario3 = False
+                print("Yes button clicked")
+
+
+            # Check if No button is clicked
+            if third_no_button.collidepoint(mouse_x, mouse_y):
+                print("No button clicked")
+                # Display the image
+                image = pygame.image.load('harvey.png')  
+                image = pygame.transform.scale(image, (WINDOW_WIDTH, WINDOW_HEIGHT))
+                window.blit(image, (0, 0,))  # Adjust position as needed
+                pygame.display.flip()
+
+                # Play the audio
+                audio = mixer.Sound('screams-of-agony-142447.mp3')  
+                audio.play()
+                pygame.time.wait(3000)
 
 
            
