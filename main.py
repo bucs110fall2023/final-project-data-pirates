@@ -190,6 +190,8 @@ music_playing = True
 start_button = pygame.Rect(300, 150, 200, 100)
 quit_button = pygame.Rect(300, 300, 200, 100)
 
+is_jumpscare_active = False
+
 while running:
     window.fill(BLACK) #Fill the window with black
     draw_button()
@@ -210,6 +212,19 @@ while running:
                     pygame.draw.rect(window, (255, 255, 255), input_box, 2)
                     text_surface = font.render(player_name, True, (255, 255, 255))
                     window.blit(text_surface, (input_box.x + 5, input_box.y + 5))
+
+            if no_button.collidepoint(mouse_x, mouse_y):
+                print("No button clicked")
+                # Display the image
+                image = pygame.image.load('Cup.png')
+                image = pygame.transform.scale(image, (WINDOW_WIDTH, WINDOW_HEIGHT))
+                window.blit(image, (0, 0,))  # Adjust position as needed
+                pygame.display.flip()
+
+                # Play the audio
+                audio = mixer.Sound('screams-of-agony-142447.mp3')
+                audio.play()
+                is_jumpscare_active = True  # Set jumpscare as active
 
             if volume_button.collidepoint(mouse_x, mouse_y) and volume_button_visible:
                 print("Volume button clicked")
