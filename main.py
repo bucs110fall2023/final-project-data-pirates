@@ -74,7 +74,7 @@ def draw_button():
 
     window.blit(game_name_text, (235, 50))
 display_text = False
-display_time = 2000
+display_time = 20000
 display_start_time = 0
 
 def display_start_text(player_name):
@@ -336,7 +336,7 @@ while running:
     elif display_scenario1:
         # Displays the first scenario
         yes_button, no_button = display_first_scenario(player_name if name_input_done else "Player")
-        pygame.time.wait(150)
+        pygame.time.wait(100)
 
         # Check for button clicks
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -365,7 +365,7 @@ while running:
     elif display_scenario2:
         # Displays the second scenario
         second_yes_button, second_no_button = display_second_scenario(player_name if name_input_done else "Player")
-        pygame.time.wait(150)
+        pygame.time.wait(100)
         # Check for button clicks
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()   
@@ -392,7 +392,7 @@ while running:
     elif display_scenario3:
         # Displays the third scenario
         third_yes_button, third_no_button = display_third_scenario(player_name if name_input_done else "Player")
-        pygame.time.wait(150)
+        pygame.time.wait(100)
         
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()   
