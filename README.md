@@ -30,7 +30,7 @@ A scary interactive game where the player will receive a letter with a message t
 
 ### Initial Design
 
-![initial gui](assets/gui.jpg)
+![initial gui](assets/gui.jpeg)
 
 ### Final Design
 
