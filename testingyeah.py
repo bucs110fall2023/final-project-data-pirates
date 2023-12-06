@@ -143,6 +143,24 @@ def display_first_scenario(player_name):
 
     return yes_button, no_button
 
+def Game_over_screen(window):
+    window.fill((0, 0, 0))  # Fill the window with black
+
+    # Font setup (adjust size and style as needed)
+    bigger_font = pygame.font.Font(None, 72)
+    font = pygame.font.Font(None, 36)
+
+    title = bigger_font.render("Game Over", True, (255, 255, 255))  # "white" -> (255, 255, 255)
+    restart_button = font.render("Press R to restart", True, (0, 255, 0))  # "green" -> (0, 255, 0)
+    quit_button = font.render("Press Q to quit", True, (255, 0, 0))  # "red" -> (255, 0, 0)
+
+    # Blit elements onto the window
+    window.blit(title, (WINDOW_WIDTH/2 - title.get_width()/2, WINDOW_HEIGHT/2 - title.get_height()))
+    window.blit(restart_button, (WINDOW_WIDTH/2 - restart_button.get_width()/2, WINDOW_HEIGHT/2 + restart_button.get_height()/2))
+    window.blit(quit_button, (WINDOW_WIDTH/2 - quit_button.get_width()/2, WINDOW_HEIGHT/2 + quit_button.get_height()/.5))
+
+    pygame.display.update()
+
 display_scenario2 = False
 def display_second_scenario(player_name):
     text_scenario2 = (
@@ -220,6 +238,7 @@ def display_third_scenario(player_name):
 
 volume_button = pygame.Rect(WINDOW_WIDTH - 100, WINDOW_HEIGHT - 50, 50, 30)
 running = True
+game_over = False
 name_input_done = False
 player_name = ""
 music_playing = True
@@ -323,6 +342,9 @@ while running:
                 audio = mixer.Sound('screams-of-agony-142447.mp3')  
                 audio.play()
                 pygame.time.wait(3000)
+
+                pygame.time.wait(3000)
+                Game_over_screen()
     
     elif display_scenario2:
         # Displays the second scenario
