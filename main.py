@@ -75,7 +75,7 @@ def draw_button():
 
     window.blit(game_name_text, (235, 50))
 display_text = False
-display_time = 2000
+display_time = 20000
 display_start_time = 0
 
 def display_start_text(player_name):
