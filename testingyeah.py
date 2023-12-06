@@ -246,6 +246,14 @@ start_button = pygame.Rect(300, 150, 200, 100)
 quit_button = pygame.Rect(300, 300, 200, 100)
 game_over_displayed = False 
 
+display_scenario1 = False
+display_scenario2 = False
+display_scenario3 = False
+
+show_first_scenario = False
+letter_display_time = 20000  # Time in milliseconds for the letter to display
+letter_start_time = 0
+
 while running:
     window.fill(BLACK) #Fill the window with black
     draw_button()
@@ -308,116 +316,117 @@ while running:
         window.blit(text_surface, (input_box.x + 5, input_box.y + 5))
          
 
-    elif display_text:
+    if display_text:
         # Display start text with player's name after name input is done
-        display_start_text(player_name if name_input_done else "Player")
         current_time = pygame.time.get_ticks()
-        if current_time - display_start_time >= display_time:
-            display_text = False 
+        current_time = pygame.time.get_ticks()
+        if current_time - display_start_time >= letter_display_time:
+            display_text = False
+            show_first_scenario = True 
     
-    elif display_scenario1:
+    if display_scenario1:
         # Displays the first scenario
-        yes_button, no_button = display_first_scenario(player_name if name_input_done else "Player")
-        pygame.time.wait(100)
+        if not game_over_displayed:
+            yes_button, no_button = display_first_scenario(player_name if name_input_done else "Player")
+            for event in pygame.event.get():
 
         # Check for button clicks
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            mouse_x, mouse_y = pygame.mouse.get_pos()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    mouse_x, mouse_y = pygame.mouse.get_pos()
 
             # Check if Yes button is clicked
-            if yes_button.collidepoint(mouse_x, mouse_y):
-                display_scenario1 = False
-                print("Yes button clicked")
+                    if yes_button.collidepoint(mouse_x, mouse_y):
+                        display_scenario1 = False
+                        print("Yes button clicked")
                 # Handle Yes action here
 
             # Check if No button is clicked
-            if no_button.collidepoint(mouse_x, mouse_y):
-                print("No button clicked")
+                    if no_button.collidepoint(mouse_x, mouse_y):
+                        print("No button clicked")
                 # Display the image
-                image = pygame.image.load('Cup.png')  
-                image = pygame.transform.scale(image, (WINDOW_WIDTH, WINDOW_HEIGHT))
-                window.blit(image, (0, 0,))  # Adjust position as needed
-                pygame.display.flip()
+                        image = pygame.image.load('Cup.png')  
+                        image = pygame.transform.scale(image, (WINDOW_WIDTH, WINDOW_HEIGHT))
+                        window.blit(image, (0, 0,))  # Adjust position as needed
+                        pygame.display.flip()
 
                 # Play the audio
-                audio = mixer.Sound('screams-of-agony-142447.mp3')  
-                audio.play()
-                pygame.time.wait(3000)
+                        audio = mixer.Sound('screams-of-agony-142447.mp3')  
+                        audio.play()
+                        pygame.time.wait(3000)
 
-                Game_over_screen(window)
-                game_over_displayed = True
+                        Game_over_screen(window)
+                        game_over_displayed = True
 
-    if game_over_displayed:
-        pygame.time.wait(5000)  # Adjust the time you want the game over screen to be displayed
-        running = False
+            display_scenario1 = False  # Move out of scenario 1
+            display_scenario2 = True   # Move to scenario 2
+
     
     elif display_scenario2:
+        if not game_over_displayed:
         # Displays the second scenario
-        second_yes_button, second_no_button = display_second_scenario(player_name if name_input_done else "Player")
-        pygame.time.wait(100)
-        # Check for button clicks
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            mouse_x, mouse_y = pygame.mouse.get_pos()   
+            second_yes_button, second_no_button = display_second_scenario(player_name if name_input_done else "Player")
+            for event in pygame.event.get():
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    mouse_x, mouse_y = pygame.mouse.get_pos()   
             
-            if second_yes_button.collidepoint(mouse_x, mouse_y):
-                display_scenario2 = False
-                print("Yes button clicked")
+                    if second_yes_button.collidepoint(mouse_x, mouse_y):
+                        display_scenario2 = False
+                        print("Yes button clicked")
 
 
             # Check if No button is clicked
-            if second_no_button.collidepoint(mouse_x, mouse_y):
-                print("No button clicked")
+                    if second_no_button.collidepoint(mouse_x, mouse_y):
+                        print("No button clicked")
                 # Display the image
-                image = pygame.image.load('piano.png')  
-                image = pygame.transform.scale(image, (WINDOW_WIDTH, WINDOW_HEIGHT))
-                window.blit(image, (0, 0,))  # Adjust position as needed
-                pygame.display.flip()
+                        image = pygame.image.load('piano.png')  
+                        image = pygame.transform.scale(image, (WINDOW_WIDTH, WINDOW_HEIGHT))
+                        window.blit(image, (0, 0,))  # Adjust position as needed
+                        pygame.display.flip()
 
                 # Play the audio
-                audio = mixer.Sound('piano-cassical-brand-motive-logo-9997.mp3')  
-                audio.play()
-                pygame.time.wait(3000)
+                        audio = mixer.Sound('piano-cassical-brand-motive-logo-9997.mp3')  
+                        audio.play()
+                        pygame.time.wait(3000)
 
-                Game_over_screen(window)
-                game_over_displayed = True
-    if game_over_displayed:
-        pygame.time.wait(5000)  # Adjust the time you want the game over screen to be displayed
-        running = False
+                        Game_over_screen(window)
+                        game_over_displayed = True
+
+            display_scenario2 = False  # Move out of scenario 2
+            display_scenario3 = True
 
 
     elif display_scenario3:
         # Displays the third scenario
-        third_yes_button, third_no_button = display_third_scenario(player_name if name_input_done else "Player")
-        
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            mouse_x, mouse_y = pygame.mouse.get_pos()   
+        if not game_over_displayed:
+            third_yes_button, third_no_button = display_third_scenario(player_name if name_input_done else "Player")
+            for event in pygame.event.get():
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    mouse_x, mouse_y = pygame.mouse.get_pos()   
             
-            if third_yes_button.collidepoint(mouse_x, mouse_y):
-                display_scenario3 = False
-                print("Yes button clicked")
+                    if third_yes_button.collidepoint(mouse_x, mouse_y):
+                        display_scenario3 = False
+                        print("Yes button clicked")
 
 
             # Check if No button is clicked
-            if third_no_button.collidepoint(mouse_x, mouse_y):
-                print("No button clicked")
+                    if third_no_button.collidepoint(mouse_x, mouse_y):
+                        print("No button clicked")
                 # Display the image
-                image = pygame.image.load('harvey.png')  
-                image = pygame.transform.scale(image, (WINDOW_WIDTH, WINDOW_HEIGHT))
-                window.blit(image, (0, 0,))  # Adjust position as needed
-                pygame.display.flip()
+                        image = pygame.image.load('harvey.png')  
+                        image = pygame.transform.scale(image, (WINDOW_WIDTH, WINDOW_HEIGHT))
+                        window.blit(image, (0, 0,))  # Adjust position as needed
+                        pygame.display.flip()
 
                 # Play the audio
-                audio = mixer.Sound('demonic-woman-scream-6333.mp3')  
-                audio.play()
-                pygame.time.wait(3000)
+                        audio = mixer.Sound('demonic-woman-scream-6333.mp3')  
+                        audio.play()
+                        pygame.time.wait(3000)
 
-                Game_over_screen(window)
-                game_over_displayed = True
+                        Game_over_screen(window)
+                        game_over_displayed = True
 
-    if game_over_displayed:
-        pygame.time.wait(5000)  # Adjust the time you want the game over screen to be displayed
-        running = False 
-
+            display_scenario3 = False  # Move out of scenario 2
+        
 
 
            
