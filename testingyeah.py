@@ -244,6 +244,7 @@ player_name = ""
 music_playing = True
 start_button = pygame.Rect(300, 150, 200, 100)
 quit_button = pygame.Rect(300, 300, 200, 100)
+game_over_displayed = False 
 
 while running:
     window.fill(BLACK) #Fill the window with black
@@ -343,8 +344,12 @@ while running:
                 audio.play()
                 pygame.time.wait(3000)
 
-                pygame.time.wait(3000)
-                Game_over_screen()
+                Game_over_screen(window)
+                game_over_displayed = True
+
+    if game_over_displayed:
+        pygame.time.wait(5000)  # Adjust the time you want the game over screen to be displayed
+        running = False
     
     elif display_scenario2:
         # Displays the second scenario
@@ -373,6 +378,13 @@ while running:
                 audio.play()
                 pygame.time.wait(3000)
 
+                Game_over_screen(window)
+                game_over_displayed = True
+    if game_over_displayed:
+        pygame.time.wait(5000)  # Adjust the time you want the game over screen to be displayed
+        running = False
+
+
     elif display_scenario3:
         # Displays the third scenario
         third_yes_button, third_no_button = display_third_scenario(player_name if name_input_done else "Player")
@@ -398,6 +410,14 @@ while running:
                 audio = mixer.Sound('demonic-woman-scream-6333.mp3')  
                 audio.play()
                 pygame.time.wait(3000)
+
+                Game_over_screen(window)
+                game_over_displayed = True
+
+    if game_over_displayed:
+        pygame.time.wait(5000)  # Adjust the time you want the game over screen to be displayed
+        running = False 
+
 
 
            
