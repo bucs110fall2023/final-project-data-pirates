@@ -347,7 +347,7 @@ while running:
                 pygame.display.flip()
 
                 # Play the audio
-                audio = mixer.Sound('screams-of-agony-142447.mp3')  
+                audio = mixer.Sound('piano-cassical-brand-motive-logo-9997.mp3')  
                 audio.play()
                 pygame.time.wait(3000)
 
@@ -373,7 +373,7 @@ while running:
                 pygame.display.flip()
 
                 # Play the audio
-                audio = mixer.Sound('screams-of-agony-142447.mp3')  
+                audio = mixer.Sound('demonic-woman-scream-6333.mp3')  
                 audio.play()
                 pygame.time.wait(3000)
 
