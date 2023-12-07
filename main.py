@@ -41,7 +41,7 @@ pygame.display.set_caption("Deadly Decisions") #replace with actual game title
 font = pygame.font.Font(None, 36)
 text_color = (255,255,255)
 
-# font for start button - D
+# font for menu option buttons
 bigger_font = pygame.font.Font(None, 80)
 font_start = pygame.font.Font(None, 48)
 game_name_text = font_start.render("DEADLY DECISIONS", True , "white") # title subject to change - D
@@ -153,6 +153,7 @@ def display_first_scenario(player_name):
 
     return yes_button, no_button
 
+# For the second scenario
 display_scenario2 = False
 def display_second_scenario(player_name):
     text_scenario2 = (
@@ -190,6 +191,7 @@ def display_second_scenario(player_name):
     window.blit(no_text, (480, 415))  # Adjust text position for No button
     return second_yes_button, second_no_button
 
+# For the third scenario
 display_scenario3 = False
 def display_third_scenario(player_name):
     text_scenario3 = (
@@ -227,6 +229,7 @@ def display_third_scenario(player_name):
     window.blit(no_text, (480, 415))  # Adjust text position for No button
     return third_yes_button, third_no_button
 
+# For the you survived window
 you_survived = False
 def display_you_survived(player_name):
     survival_text = bigger_font.render("You Escaped!", True, "green")
