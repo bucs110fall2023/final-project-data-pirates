@@ -6,7 +6,7 @@ pygame.init()
 mixer.init()
 
 #Load music file and set volume
-mixer.music.load('lost-soul_medium-177571.mp3') #insert song here
+mixer.music.load('assets/lost-soul_medium-177571.mp3') #insert song here
 mixer.music.set_volume(0.7)
 mixer.music.play()
 #bruh
@@ -47,6 +47,7 @@ font = pygame.font.Font(None, 36)
 text_color = (255,255,255)
 
 # font for start button - D
+bigger_font = pygame.font.Font(None, 80)
 font_start = pygame.font.Font(None, 48)
 game_name_text = font_start.render("DEADLY DECISIONS", True , "white") # title subject to change - D
 start_text = font_start.render("START", True , BLACK)
@@ -221,6 +222,43 @@ def display_third_scenario(player_name):
     window.blit(no_text, (480, 415))  # Adjust text position for No button
     return third_yes_button, third_no_button
 
+you_survived = False
+def display_you_survived(player_name):
+    survival_text = bigger_font.render("You Escaped!", True, "green")
+    window.blit(survival_text, (210, 90))
+    
+    you_survived_text = (
+        "You instead gave him a hug, \n" 
+        "and he helped you escape, \n"
+        "Go bearcats! \n"
+        f"Good job {player_name}, you \n"
+        "managed to escape but be \n"
+        "careful out there... until we\n"
+        " meet again... MWAHAHAHA \n"
+    )
+
+    box5_width = 400
+    box5_height = 270
+    box_x = (WINDOW_WIDTH - box5_width) // 2
+    box_y = (WINDOW_HEIGHT - box5_height) // 2
+
+
+    lines = you_survived_text.split('\n')
+    for i, line in enumerate(lines):
+        line_surface = font.render(line, True, "white")
+        window.blit(line_surface, (box_x + 20, box_y + 20 + i * 30))
+
+    pygame.draw.rect(window, (255, 255, 255), (box_x, box_y, box5_width, box5_height), 3)
+
+    # # Define rectangle for Quit button
+    second_quit_button = pygame.Rect(340, 490, 100, 50)
+
+    # Draw quit button
+    pygame.draw.rect(window, "green", second_quit_button)  # green button for Yes
+    quit_text = font.render("QUIT", True, BLACK)
+    window.blit(quit_text, (357, 505))  # Adjust text position for Yes button
+
+    return second_quit_button
 
 volume_button = pygame.Rect(WINDOW_WIDTH - 100, WINDOW_HEIGHT - 50, 50, 30)
 running = True
@@ -271,6 +309,7 @@ while running:
                     display_scenario1 = True
                     display_scenario2 = True
                     display_scenario3 = True
+                    you_survived = True
                     display_start_time = pygame.time.get_ticks()
                     start_exit_buttons_visible = False
 
@@ -319,13 +358,13 @@ while running:
             if no_button.collidepoint(mouse_x, mouse_y):
                 print("No button clicked")
                 # Display the image
-                image = pygame.image.load('Cup.png')  
+                image = pygame.image.load('assets/Cup.png')  
                 image = pygame.transform.scale(image, (WINDOW_WIDTH, WINDOW_HEIGHT))
                 window.blit(image, (0, 0,))  # Adjust position as needed
                 pygame.display.flip()
 
                 # Play the audio
-                audio = mixer.Sound('screams-of-agony-142447.mp3')  
+                audio = mixer.Sound('assets/screams-of-agony-142447.mp3')  
                 audio.play()
                 pygame.time.wait(3000)
     
@@ -346,47 +385,38 @@ while running:
             if second_no_button.collidepoint(mouse_x, mouse_y):
                 print("No button clicked")
                 # Display the image
-                image = pygame.image.load('piano.png')  
+                image = pygame.image.load('assets/piano.png')  
                 image = pygame.transform.scale(image, (WINDOW_WIDTH, WINDOW_HEIGHT))
                 window.blit(image, (0, 0,))  # Adjust position as needed
                 pygame.display.flip()
 
                 # Play the audio
-                audio = mixer.Sound('piano-cassical-brand-motive-logo-9997.mp3')  
+                audio = mixer.Sound('assets/Scary_piano.mp3')  
                 audio.play()
-                pygame.time.wait(3000)
+                pygame.time.wait(11000)
 
     elif display_scenario3:
         # Displays the third scenario
         third_yes_button, third_no_button = display_third_scenario(player_name if name_input_done else "Player")
+        pygame.time.wait(100)
         
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()   
             
             if third_yes_button.collidepoint(mouse_x, mouse_y):
-                display_scenario3 = False
                 print("Yes button clicked")
-
-
-            # Check if No button is clicked
-            if third_no_button.collidepoint(mouse_x, mouse_y):
-                print("No button clicked")
                 # Display the image
-                image = pygame.image.load('harvey.png')  
+                image = pygame.image.load('assets/harvey.png')  
                 image = pygame.transform.scale(image, (WINDOW_WIDTH, WINDOW_HEIGHT))
                 window.blit(image, (0, 0,))  # Adjust position as needed
                 pygame.display.flip()  
 
                 # Play the audio
-                audio = mixer.Sound('demonic-woman-scream-6333.mp3')  
+                audio = mixer.Sound('assets/demonic-woman-scream-6333.mp3')  
                 audio.play()
-                pygame.time.wait(5000)
-                game_over_start_time = pygame.time.get_ticks()  # Record the time when "No" is clicked
-                display_scenario3 = False
-                game_over_displayed = True  
-        
-        
-            
+                pygame.time.wait(3000)
+
+
            
             pygame.display.flip()
 
