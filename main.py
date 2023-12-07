@@ -53,6 +53,16 @@ input_box = pygame.Rect(335,500,140,32)
 name = ""
 input_active = True
 
+def Game_over():
+    window.fill(BLACK)
+    game_over_text = bigger_font.render("GAME OVER!", True, "red")
+    window.blit(game_over_text, (210, 90))
+    ending_message_text = font_start.render("You were not able to escape, try again!", True, "white")
+    window.blit(ending_message_text, (100, 170))
+    pygame.display.flip()
+    pygame.time.wait(5000)
+    pygame.quit()
+
 #this the functtion to draw button
 def draw_button():
     
@@ -243,6 +253,7 @@ def display_you_survived(player_name):
         line_surface = font.render(line, True, "white")
         window.blit(line_surface, (box_x + 20, box_y + 20 + i * 30))
 
+
     pygame.draw.rect(window, (255, 255, 255), (box_x, box_y, box5_width, box5_height), 3)
 
     # # Define rectangle for Quit button
@@ -254,6 +265,7 @@ def display_you_survived(player_name):
     window.blit(quit_text, (357, 505))  # Adjust text position for Yes button
 
     return second_quit_button
+
 
 volume_button = pygame.Rect(WINDOW_WIDTH - 100, WINDOW_HEIGHT - 50, 50, 30)
 running = True
@@ -361,6 +373,8 @@ while running:
                 audio = mixer.Sound('assets/screams-of-agony-142447.mp3')  
                 audio.play()
                 pygame.time.wait(3000)
+
+                Game_over()
     
     elif display_scenario2:
         # Displays the second scenario
@@ -389,6 +403,8 @@ while running:
                 audio.play()
                 pygame.time.wait(11000)
 
+                Game_over()
+
     elif display_scenario3:
         # Displays the third scenario
         third_yes_button, third_no_button = display_third_scenario(player_name if name_input_done else "Player")
@@ -409,6 +425,8 @@ while running:
                 audio = mixer.Sound('assets/demonic-woman-scream-6333.mp3')  
                 audio.play()
                 pygame.time.wait(3000)
+
+                Game_over()
 
 
             # Check if No button is clicked
