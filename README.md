@@ -49,12 +49,6 @@ A scary interactive game where the player will receive a letter with a message t
 ### Classes
 
 1. GameState - Defines different states of the game: MAIN_MENU, NAME_INPUT, GAMEPLAY. 
-2. Window Setup- Handles the game window configuration, including dimensions and title.
-3. PlayerInput - Manages user input for entering the player's name and switches between game states.
-4. ScenarioDisplay - Displays different scenarios to the player and handles the buttons for choices.
-5. GameOutcome - Manages the display of game-over or success screens based on player choices.
-6. GameLoop - Controls the continuous execution of the game, handling events, rendering screens, and checking for user input.
-
 
 ## ATP
 | Case #   | Description | Steps | Outcome |
