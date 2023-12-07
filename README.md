@@ -34,7 +34,7 @@ A scary interactive game where the player will receive a letter with a message t
 
 ### Final Design
 
-![final gui](assets/finalgui.jpg)
+![final gui](assets/finalgui.jpeg)
 
 ## Program Design
 
