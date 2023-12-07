@@ -48,14 +48,20 @@ A scary interactive game where the player will receive a letter with a message t
 
 ### Classes
 
-- << You should have a list of each of your classes with a description >>
+1. GameState - Defines different states of the game: MAIN_MENU, NAME_INPUT, GAMEPLAY. 
+2. Window Setup- Handles the game window configuration, including dimensions and title.
+3. PlayerInput - Manages user input for entering the player's name and switches between game states.
+4. ScenarioDisplay - Displays different scenarios to the player and handles the buttons for choices.
+5. GameOutcome - Manages the display of game-over or success screens based on player choices.
+6. GameLoop - Controls the continuous execution of the game, handling events, rendering screens, and checking for user input.
+
 
 ## ATP
 | Case #   | Description | Steps | Outcome |
 | -------- | ----------- | ----- | ------- |
 | Test Case 1: Menu Navigation | Verify player can start and quit the game. |  Navigate through the main menu, and confirm that the start button starts the game, and that the quit button quits the game or closes the window.| The main menu should allow the player to start and quit the game when they press the start/quit button. |
 | Test Case 2: Volume Button | Verify Player can turn music on and off. | 1. start game. 2. Go to bottom right corner on menu where red button is. 3. Click to turn music off. 4. Click once more to turn music on.| Players control over sounds |
-| Test Case 3: Name Check | Verify that the player can input their name | Once the player clicks the start button, the player will be prompted to input their name which will be later on used during the game. The player should be able to write their name. | The player’s name should be displayed throughout the game. |
+| Test Case 3: Name Check | Verify that the player can input their name | Once the player clicks the start button and then clicks the box that appears. The player will be prompted to input their name which will be later on used during the game. The player should be able to write their name. | The player’s name should be displayed throughout the game. |
 | Test Case 4: Jump scare | Verify that when player loses or picks the wrong choice in one of the scenarios, an image pops up. | Start game, and when an scenario appears, they will have to pick yes or no. If they pick the wrong choice, they will be jumpscared.| A jump scare with sound. |
 | Test Case 5: | Verify that the game ends once the player makes the wrong decision. | When the player is asked to choose between the choices given, if they choose the wrong one, a “Gave Over” message should be displayed. | The game will display a “Game Over” message when the player makes the wrong choice. |
 
